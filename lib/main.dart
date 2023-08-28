@@ -44,6 +44,103 @@ class _MyHomePageState extends State<MyHomePage> {
       return null; // Start or end word not found
     }
   }
+  String? getUrlString(int a,int b){
+    String Uurl='';
+    if(a == 1 && b >= 16 && b <= 18){
+    Uurl='https://vedabase.io/en/library/bg/1/16-18/';
+    }
+    else if(a == 1 && b >= 21 && b <= 22){
+      Uurl='https://vedabase.io/en/library/bg/1/21-22/';
+    }
+    else if(a == 1 && b >= 32 && b <= 35){
+      Uurl='https://vedabase.io/en/library/bg/1/32-35/';
+    }
+    else if(a == 1 && b >= 37 && b <= 38){
+      Uurl='https://vedabase.io/en/library/bg/1/37-38/';
+    }
+    else if(a == 2 && b >= 42 && b <= 43){
+      Uurl='https://vedabase.io/en/library/bg/2/42-43/';
+    }
+    else if(a == 5 && b >= 8 && b <= 9){
+      Uurl='https://vedabase.io/en/library/bg/5/8-9/';
+    }
+    else if(a == 5 && b >= 27 && b <= 28){
+      Uurl='https://vedabase.io/en/library/bg/5/27-28/';
+    }
+    else if(a == 6 && b >= 11 && b <= 12){
+      Uurl='https://vedabase.io/en/library/bg/6/11-12/';
+    }
+    else if(a == 6 && b >= 13 && b <= 14){
+      Uurl='https://vedabase.io/en/library/bg/6/13-14/';
+    }
+    else if(a == 6 && b >= 20 && b <= 23){
+      Uurl='https://vedabase.io/en/library/bg/6/20-23/';
+    }
+    else if(a == 10 && b >= 4 && b <= 5){
+      Uurl='https://vedabase.io/en/library/bg/10/4-5/';
+    }
+    else if(a == 10 && b >= 12 && b <= 13){
+      Uurl='https://vedabase.io/en/library/bg/10/12-13/';
+    }
+    else if(a == 11 && b >= 10 && b <= 11){
+      Uurl='https://vedabase.io/en/library/bg/11/10-11/';
+    }
+    else if(a == 11 && b >= 26 && b <= 27){
+      Uurl='https://vedabase.io/en/library/bg/11/26-27/';
+    }
+    else if(a == 11 && b >= 41 && b <= 42){
+      Uurl='https://vedabase.io/en/library/bg/11/41-42/';
+    }
+    else if(a == 12 && b >= 3 && b <= 4){
+      Uurl='https://vedabase.io/en/library/bg/12/3-4/';
+    }
+    else if(a == 12 && b >= 6 && b <= 7){
+      Uurl='https://vedabase.io/en/library/bg/12/6-7/';
+    }
+    else if(a == 12 && b >= 13 && b <= 14){
+      Uurl='https://vedabase.io/en/library/bg/12/13-14/';
+    }
+    else if(a == 12 && b >= 18 && b <= 19){
+      Uurl='https://vedabase.io/en/library/bg/12/18-19/';
+    }
+    else if(a == 13 && b >= 1 && b <= 2){
+      Uurl='https://vedabase.io/en/library/bg/13/1-2/';
+    }
+    else if(a == 13 && b >= 6 && b <= 7){
+      Uurl='https://vedabase.io/en/library/bg/13/6-7/';
+    }
+    else if(a == 13 && b >= 8 && b <= 12){
+      Uurl='https://vedabase.io/en/library/bg/13/8-12/';
+    }
+    else if(a == 14 && b >= 22 && b <= 25){
+      Uurl='https://vedabase.io/en/library/bg/14/22-25/';
+    }
+    else if(a == 15 && b >= 3 && b <= 4){
+      Uurl='https://vedabase.io/en/library/bg/15/3-4/';
+    }
+    else if(a == 16 && b >= 1 && b <= 3){
+      Uurl='https://vedabase.io/en/library/bg/16/1-3/';
+    }
+    else if(a == 16 && b >= 11 && b <= 12){
+      Uurl='https://vedabase.io/en/library/bg/16/11-12/';
+    }
+    else if(a == 16 && b >= 13 && b <= 15){
+      Uurl='https://vedabase.io/en/library/bg/16/13-15/';
+    }
+    else if(a == 17 && b >= 5 && b <= 6){
+      Uurl='https://vedabase.io/en/library/bg/17/5-6/';
+    }
+    else if(a == 17 && b >= 26 && b <= 27){
+      Uurl='https://vedabase.io/en/library/bg/17/26-27/';
+    }
+    else if(a == 18 && b >= 51 && b <= 53){
+      Uurl='https://vedabase.io/en/library/bg/18/51-53/';
+    }
+    else{
+    Uurl='https://vedabase.io/en/library/bg/a/b/';
+    }
+    return Uurl;
+  }
   Future getWebsiteData(int i,int j) async {
     int bgChapterNum = i;
     int bgShlokaNum = j;
@@ -60,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Finalurl="https://www.holy-bhagavad-gita.org/public/audio/0${bgChapterNum}_00$bgShlokaNum.mp3";
     }
     print(Finalurl);
-    final url=Uri.parse("https://vedabase.io/en/library/bg/$bgChapterNum/$bgShlokaNum/");
+    final url=Uri.parse(getUrlString(bgChapterNum, bgShlokaNum)!);
     final response= await http.get(url);
     dom.Document html=dom.Document.html(response.body);
     final ttle=html
@@ -92,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getWebsiteData(15,6);
+    getWebsiteData(1,16);
     audioPlayer.onPlayerStateChanged.listen((state) {
       setState(() {
         isPlaying = state == PlayerState.playing;
